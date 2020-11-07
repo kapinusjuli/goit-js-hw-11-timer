@@ -1,0 +1,31 @@
+{
+  "name": "goit-js-hw-11-timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+
+  "dependencies": {},
+  
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-nuke-dist": "^1.0.1"
+  },
+  "scripts": {
+    "dev": "parcel src/timer.html",
+    "build": "parcel build src/timer.html --public-url /goit-js-hw-11-timer.git/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "postbuild": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapinusjuli/goit-js-hw-11-timer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kapinusjuli/goit-js-hw-11-timer/issues"
+  },
+  "homepage": "https://kapinusjuli.github.io/goit-js-hw-11-timer"
+
+}
