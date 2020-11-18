@@ -16,42 +16,72 @@ class CountdownTimer {
 
   // const timer = {
   start() {
-    setInterval(() => {
-      const currentTime = Date.now();
+    this.renderTime();
 
-      const time = this.targetDate - currentTime;
-      const { days, hours, mins, secs } = GetTimeComponents(time);
-      //   console.log('delta: ', time);
-      updateClockFace({ days, hours, mins, secs });
-      console.log(`${days}::${hours}::${mins}::${secs}`);
+    setInterval(() => {
+      this.renderTime();
     }, 1000);
+  }
+  ////////методы
+
+  renderTime() {
+    const currentTime = Date.now();
+
+    const time = this.targetDate - currentTime;
+    const { days, hours, mins, secs } = this.GetTimeComponents(time);
+    //   console.log('delta: ', time);
+    this.updateClockFace({ days, hours, mins, secs });
+    console.log(`${days}::${hours}::${mins}::${secs}`);
+  }
+
+  GetTimeComponents(time) {
+    const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+    const hours = this.pad(
+      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    );
+    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+
+    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+    return { days, hours, mins, secs };
+  }
+
+  pad(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  updateClockFace({ days, hours, mins, secs }) {
+    // clockFace.textContent = `${days}:${hours}:${mins}:${secs}`;
+    daysValue.textContent = `${days}`;
+    hoursValue.textContent = `${hours}`;
+    minsValue.textContent = `${mins}`;
+    secsValue.textContent = `${secs}`;
   }
 }
 // }
 // timer.start();
 
-function pad(value) {
-  return String(value).padStart(2, '0');
-}
+// function pad(value) {
+//   return String(value).padStart(2, '0');
+// }
 
-function GetTimeComponents(time) {
-  const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
-  const hours = pad(
-    Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-  );
-  const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+// function GetTimeComponents(time) {
+//   const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+//   const hours = pad(
+//     Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+//   );
+//   const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
 
-  const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-  return { days, hours, mins, secs };
-}
+//   const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+//   return { days, hours, mins, secs };
+// }
 
-function updateClockFace({ days, hours, mins, secs }) {
-  // clockFace.textContent = `${days}:${hours}:${mins}:${secs}`;
-  daysValue.textContent = `${days}`;
-  hoursValue.textContent = `${hours}`;
-  minsValue.textContent = `${mins}`;
-  secsValue.textContent = `${secs}`;
-}
+// function updateClockFace({ days, hours, mins, secs }) {
+//   // clockFace.textContent = `${days}:${hours}:${mins}:${secs}`;
+//   daysValue.textContent = `${days}`;
+//   hoursValue.textContent = `${hours}`;
+//   minsValue.textContent = `${mins}`;
+//   secsValue.textContent = `${secs}`;
+// }
 
 new CountdownTimer({
   selector: '#timer-1',
